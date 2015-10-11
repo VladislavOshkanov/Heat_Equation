@@ -84,7 +84,6 @@ int main (){
 	} 
 	
 	
-	cout << endl << endl;
 	double cour = courant_number(A, tao, h);
 	double a[N], b[N], c[N],f[N];
 	for (int k = 1; k < tao_length; k++){
@@ -105,13 +104,11 @@ int main (){
 		}
 	}
 	
-	cout << endl;
 	for (i = 0; i < tao_length; i++){
 		for (int j = 0; j < x_length; j++)
 			approx << U[i][j] << " ";
 		approx << endl;
 	}
-	cout << endl;
 	for (int i = 0; i < tao_length; i++){
 		for (int j = 0; j < x_length; j++)
 			func << u(x[j], t[i]) << " ";
