@@ -1,8 +1,9 @@
 #include<fstream>
 #include<math.h>
+#include<stdlib.h>
 #include<iostream>
 using namespace std;
-const int N = 100;
+const int N = 100000;
 const double A = 0.034;
 
 double m2 (double t){
@@ -59,8 +60,7 @@ int main (){
 	while ((i-1)*h < 1){
 		x[i] = i*h;
 		i++;
-	}	
-	
+	}		
 	int x_length = i;
 	i = 0;
 	while ((i-1)*tao < 1){
@@ -69,8 +69,13 @@ int main (){
 	}
 	int tao_length = i;
 	
-	double U[tao_length][x_length];
+//	double U[tao_length][x_length];
+	double **U;
+	U = (double**)calloc(sizeof(double*), tao_length);
+	for (int i = 0; i<tao_length; i++)
+		U[i] = (double*)calloc(sizeof(double), x_length);	
 	
+
 	for (int i = 0; i < tao_length; i++)
 		for (int j = 0; j < x_length; j++)
 			U[i][j] = 0;
@@ -114,7 +119,13 @@ int main (){
 			func << u(x[j], t[i]) << " ";
 		func << endl;
 	}
+	double max = 0;
+	for (i = 0; i < tao_length; i++)
+		for (int j = 0; j < x_length; j++)
+		   	if (fabs(U[i][j]-u(x[j], t[i])) > max)  max = fabs(U[i][j]-u(x[j],t[i]));
+	cout << max << endl;
 	return 0;
+
 }
 
 
