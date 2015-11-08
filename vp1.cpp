@@ -118,16 +118,22 @@ int main (){
 			U[k][i] = result[i - 1];
 		}
 	}
-	
+	int sx = x_length / 30;
+	int stao  = tao_length / 30;	
 	for (i = 0; i < tao_length; i++){
-		for (int j = 0; j < x_length; j++)
-			approx << U[i][j] << " ";
-		approx << endl;
+		for (int j = 0; j < x_length; j++){
+				if (i % sx == 0 && j % stao == 0){
+				approx << x[i] << " " << t[j] << " ";
+				approx << U[i][j] << endl;}
+			}
 	}
 	for (int i = 0; i < tao_length; i++){
-		for (int j = 0; j < x_length; j++)
-			func << u(x[j], t[i]) << " ";
-		func << endl;
+		for (int j = 0; j < x_length; j++){
+				if (i % sx == 0 && j % stao == 0){
+				func << x[i] << " " << t[j] << " ";
+				func << u(x[j], t[i]);
+				func << endl;}
+			}
 	}
 	double max = 0;
 	for (i = 0; i < tao_length; i++)
