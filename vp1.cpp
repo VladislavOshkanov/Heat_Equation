@@ -3,7 +3,6 @@
 #include<stdlib.h>
 #include<iostream>
 using namespace std;
-const int N = 100000;
 const double A = 0.034;
 
 double m2 (double t){
@@ -54,9 +53,12 @@ int main (){
 	approx.open("approx.txt");
 	func.open("func.txt");
 	cout.precision(4);
-   	double x[N], t[N], tao, h;
+   	double *x, *t, tao, h;
 	cin >> tao >> h;
+	int N = fmax (fabs(1/tao)+10, fabs(1/h)+10);//crutch
 	int i = 0;
+	x = (double*)calloc(sizeof(double*), N);
+	t = (double*)calloc(sizeof(double*), N);
 	while ((i-1)*h < 1){
 		x[i] = i*h;
 		i++;
@@ -90,7 +92,15 @@ int main (){
 	
 	
 	double cour = courant_number(A, tao, h);
-	double a[N], b[N], c[N],f[N];
+	double *a, *b, *c,*f, *ia, *ib, *ic, *fi;
+	a = (double*) calloc(sizeof(double), x_length);
+	b = (double*) calloc(sizeof(double), x_length);
+	c = (double*) calloc(sizeof(double), x_length);
+	f = (double*) calloc(sizeof(double), x_length);
+
+
+
+
 	for (int k = 1; k < tao_length; k++){
 		for (i = 0; i < x_length-2; i++){
 			a[i]=(cour+1); 
